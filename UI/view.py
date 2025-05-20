@@ -59,6 +59,7 @@ class View(ft.UserControl):
         self._page.controls.append(self.txtOut2)
         self._page.update()
 
+
         self.txtN = ft.TextField(label="Lunghezza percorso")
         self.btn_path = ft.ElevatedButton(text="Calcola percorso", on_click=self._controller.handle_path)
 

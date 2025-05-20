@@ -36,8 +36,23 @@ class Controller:
 
     def handle_volume(self, e):
         self._view.txtOut2.clean()
-        self._view.txtOut2.controls.append(ft.Text(f"Numero di volume: {self._model.getVolume()}"))
+        lista_volumi = self._model.getListaVolumi()
+        for vicino in lista_volumi:
+            self._view.txtOut2.controls.append(ft.Text(f"{vicino[0].Retailer_name} --> {vicino[1]}"))
+        self._view.update_page()
 
 
     def handle_path(self, e):
-        pass
+        numArchi = self._view.txtN.value
+        if numArchi is None or numArchi == "0" or numArchi == "1":
+            self._view.create_alert("Digitare un numero maggiore di1")
+        try:
+            numArchi = int(numArchi)
+        except ValueError:
+            self._view.create_alert("Digitare un numero intero")
+
+        lista_cammino = self._model.getCamminoOttimo(numArchi)
+        for el in lista_cammino:
+            self._view.txtOut3.controls.append(ft.Text(f"{el}"))
+        self._view.update_page()
+
